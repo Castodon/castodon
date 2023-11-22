@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-source 'https://rubygems.org'
+#source 'https://rubygems.org'
+source 'http://mirrors.tuna.tsinghua.edu.cn/rubygems'
 ruby '>= 3.0.0'
 
 gem 'puma', '~> 6.3'
@@ -8,9 +9,6 @@ gem 'rails', '~> 7.1.1'
 gem 'sprockets', '~> 3.7.2'
 gem 'thor', '~> 1.2'
 gem 'rack', '~> 2.2.7'
-
-# For why irb is in the Gemfile, see: https://ruby.social/@st0012/111444685161478182
-gem 'irb', '~> 1.8'
 
 gem 'haml-rails', '~>2.0'
 gem 'pg', '~> 1.5'
@@ -41,7 +39,10 @@ gem 'net-ldap', '~> 0.18'
 
 # TODO: Point back at released omniauth-cas gem when PR merged
 # https://github.com/dlindahl/omniauth-cas/pull/68
-gem 'omniauth-cas', github: 'stanhu/omniauth-cas', ref: '4211e6d05941b4a981f9a36b49ec166cecd0e271'
+# Use gitee site to avoid TSL error on build
+#gem 'omniauth-cas', github: 'stanhu/omniauth-cas', ref: '4211e6d05941b4a981f9a36b49ec166cecd0e271'
+gem 'omniauth-cas', git: 'https://gitee.com/castodon/omniauth-cas.git', ref: '4211e6d05941b4a981f9a36b49ec166cecd0e271'
+
 gem 'omniauth-saml', '~> 2.0'
 gem 'omniauth_openid_connect', '~> 0.6.1'
 gem 'omniauth', '~> 2.0'
@@ -64,7 +65,11 @@ gem 'kaminari', '~> 1.2'
 gem 'link_header', '~> 0.0'
 gem 'mime-types', '~> 3.5.0', require: 'mime/types/columnar'
 gem 'nokogiri', '~> 1.15'
-gem 'nsa', github: 'jhawthorn/nsa', ref: 'e020fcc3a54d993ab45b7194d89ab720296c111b'
+
+# Use gitee site to avoid TSL error on build
+#gem 'nsa', github: 'jhawthorn/nsa', ref: 'e020fcc3a54d993ab45b7194d89ab720296c111b'
+gem 'nsa', git: 'https://gitee.com/castodon/nsa.git', ref: 'e020fcc3a54d993ab45b7194d89ab720296c111b'
+
 gem 'oj', '~> 3.14'
 gem 'ox', '~> 2.14'
 gem 'parslet'
@@ -75,7 +80,11 @@ gem 'premailer-rails'
 gem 'rack-attack', '~> 6.6'
 gem 'rack-cors', '~> 2.0', require: 'rack/cors'
 gem 'rails-i18n', '~> 7.0'
-gem 'rails-settings-cached', '~> 0.6', git: 'https://github.com/mastodon/rails-settings-cached.git', branch: 'v0.6.6-aliases-true'
+
+# Use gitee site to avoid TSL error on build
+#gem 'rails-settings-cached', '~> 0.6', git: 'https://github.com/mastodon/rails-settings-cached.git', branch: 'v0.6.6-aliases-true'
+gem 'rails-settings-cached', '~> 0.6', git: 'https://gitee.com/castodon/rails-settings-cached.git', branch: 'v0.6.6-aliases-true'
+
 gem 'redcarpet', '~> 3.6'
 gem 'redis', '~> 4.5', require: ['redis', 'redis/connection/hiredis']
 gem 'mario-redis-lock', '~> 1.2', require: 'redis_lock'
@@ -96,7 +105,11 @@ gem 'tty-prompt', '~> 0.23', require: false
 gem 'twitter-text', '~> 3.1.0'
 gem 'tzinfo-data', '~> 1.2023'
 gem 'webpacker', '~> 5.4'
-gem 'webpush', github: 'ClearlyClaire/webpush', ref: 'f14a4d52e201128b1b00245d11b6de80d6cfdcd9'
+
+# Use gitee site to avoid TSL error on build
+#gem 'webpush', github: 'ClearlyClaire/webpush', ref: 'f14a4d52e201128b1b00245d11b6de80d6cfdcd9'
+gem 'webpush', git: 'https://gitee.com/castodon/webpush.git', ref: 'f14a4d52e201128b1b00245d11b6de80d6cfdcd9'
+
 gem 'webauthn', '~> 3.0'
 
 gem 'json-ld'
@@ -182,9 +195,6 @@ group :development do
 end
 
 group :development, :test do
-  # Interactive Debugging tools
-  gem 'debug', '~> 1.8'
-
   # Profiling tools
   gem 'memory_profiler', require: false
   gem 'ruby-prof', require: false

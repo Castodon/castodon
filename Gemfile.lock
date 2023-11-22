@@ -1,14 +1,5 @@
 GIT
-  remote: https://github.com/ClearlyClaire/webpush.git
-  revision: f14a4d52e201128b1b00245d11b6de80d6cfdcd9
-  ref: f14a4d52e201128b1b00245d11b6de80d6cfdcd9
-  specs:
-    webpush (0.3.8)
-      hkdf (~> 0.2)
-      jwt (~> 2.0)
-
-GIT
-  remote: https://github.com/jhawthorn/nsa.git
+  remote: https://gitee.com/castodon/nsa.git
   revision: e020fcc3a54d993ab45b7194d89ab720296c111b
   ref: e020fcc3a54d993ab45b7194d89ab720296c111b
   specs:
@@ -19,15 +10,7 @@ GIT
       statsd-ruby (~> 1.4, >= 1.4.0)
 
 GIT
-  remote: https://github.com/mastodon/rails-settings-cached.git
-  revision: 86328ef0bd04ce21cc0504ff5e334591e8c2ccab
-  branch: v0.6.6-aliases-true
-  specs:
-    rails-settings-cached (0.6.6)
-      rails (>= 4.2.0)
-
-GIT
-  remote: https://github.com/stanhu/omniauth-cas.git
+  remote: https://gitee.com/castodon/omniauth-cas.git
   revision: 4211e6d05941b4a981f9a36b49ec166cecd0e271
   ref: 4211e6d05941b4a981f9a36b49ec166cecd0e271
   specs:
@@ -36,8 +19,25 @@ GIT
       nokogiri (~> 1.5)
       omniauth (>= 1.2, < 3)
 
+GIT
+  remote: https://gitee.com/castodon/rails-settings-cached.git
+  revision: 86328ef0bd04ce21cc0504ff5e334591e8c2ccab
+  branch: v0.6.6-aliases-true
+  specs:
+    rails-settings-cached (0.6.6)
+      rails (>= 4.2.0)
+
+GIT
+  remote: https://gitee.com/castodon/webpush.git
+  revision: f14a4d52e201128b1b00245d11b6de80d6cfdcd9
+  ref: f14a4d52e201128b1b00245d11b6de80d6cfdcd9
+  specs:
+    webpush (0.3.8)
+      hkdf (~> 0.2)
+      jwt (~> 2.0)
+
 GEM
-  remote: https://rubygems.org/
+  remote: http://mirrors.tuna.tsinghua.edu.cn/rubygems/
   specs:
     actioncable (7.1.2)
       actionpack (= 7.1.2)
@@ -131,8 +131,8 @@ GEM
     attr_required (1.0.1)
     awrence (1.2.1)
     aws-eventstream (1.2.0)
-    aws-partitions (1.853.0)
-    aws-sdk-core (3.187.0)
+    aws-partitions (1.855.0)
+    aws-sdk-core (3.187.1)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.651.0)
       aws-sigv4 (~> 1.5)
@@ -140,7 +140,7 @@ GEM
     aws-sdk-kms (1.72.0)
       aws-sdk-core (~> 3, >= 3.184.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-s3 (1.137.0)
+    aws-sdk-s3 (1.138.0)
       aws-sdk-core (~> 3, >= 3.181.0)
       aws-sdk-kms (~> 1)
       aws-sigv4 (~> 1.6)
@@ -156,7 +156,7 @@ GEM
       nokogiri (~> 1, >= 1.10.8)
     base64 (0.2.0)
     bcp47_spec (0.2.1)
-    bcrypt (3.1.19)
+    bcrypt (3.1.20)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -213,16 +213,13 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    css_parser (1.14.0)
+    css_parser (1.16.0)
       addressable
     database_cleaner-active_record (2.1.0)
       activerecord (>= 5.a)
       database_cleaner-core (~> 2.0.0)
     database_cleaner-core (2.0.1)
     date (3.3.4)
-    debug (1.8.0)
-      irb (>= 1.5.0)
-      reline (>= 0.3.1)
     debug_inspector (1.1.0)
     devise (4.9.3)
       bcrypt (~> 3.0)
@@ -243,8 +240,7 @@ GEM
     discard (1.3.0)
       activerecord (>= 4.2, < 8)
     docile (1.4.0)
-    domain_name (0.5.20190701)
-      unf (>= 0.0.5, < 1.0.0)
+    domain_name (0.6.20231109)
     doorkeeper (5.6.6)
       railties (>= 5)
     dotenv (2.8.1)
@@ -302,7 +298,7 @@ GEM
       faraday (~> 1.0)
     fast_blank (1.0.1)
     fastimage (2.2.7)
-    ffi (1.15.5)
+    ffi (1.16.3)
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
@@ -318,7 +314,7 @@ GEM
       fog-core (~> 2.1)
       fog-json (>= 1.0)
     formatador (1.1.0)
-    fugit (1.8.1)
+    fugit (1.9.0)
       et-orbi (~> 1, >= 1.2.7)
       raabro (~> 1.4)
     fuubar (2.5.1)
@@ -326,7 +322,7 @@ GEM
       ruby-progressbar (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (6.2.0)
+    haml (6.2.3)
       temple (>= 0.8.2)
       thor
       tilt
@@ -460,7 +456,6 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2023.1003)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.5)
     minitest (5.20.0)
     msgpack (1.7.2)
     multi_json (1.15.0)
@@ -470,7 +465,7 @@ GEM
       uri
     net-http-persistent (4.0.2)
       connection_pool (~> 2.2)
-    net-imap (0.4.4)
+    net-imap (0.4.6)
       date
       net-protocol
     net-ldap (0.18.0)
@@ -480,9 +475,8 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.5.9)
-    nokogiri (1.15.5)
-      mini_portile2 (~> 2.8.2)
+    nio4r (2.6.1)
+    nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     oj (3.16.1)
     omniauth (2.1.1)
@@ -509,7 +503,7 @@ GEM
       validate_email
       validate_url
       webfinger (~> 1.2)
-    openssl (3.1.0)
+    openssl (3.2.0)
     openssl-signature_algorithm (1.3.0)
       openssl (> 2.0)
     orm_adapter (0.5.0)
@@ -554,9 +548,9 @@ GEM
       httpclient
       json-jwt (>= 1.11.0)
       rack (>= 2.1.0)
-    rack-protection (3.0.5)
-      rack
-    rack-proxy (0.7.6)
+    rack-protection (3.1.0)
+      rack (~> 2.2, >= 2.2.4)
+    rack-proxy (0.7.7)
       rack
     rack-session (1.0.1)
       rack (< 3)
@@ -606,8 +600,8 @@ GEM
     rdf (3.3.1)
       bcp47_spec (~> 0.2)
       link_header (~> 0.0, >= 0.0.8)
-    rdf-normalize (0.6.1)
-      rdf (~> 3.2)
+    rdf-normalize (0.7.0)
+      rdf (~> 3.3)
     rdoc (6.6.0)
       psych (>= 4.0.0)
     redcarpet (3.6.0)
@@ -626,7 +620,7 @@ GEM
       railties (>= 5.2)
     rexml (3.2.6)
     rotp (6.3.0)
-    rouge (4.1.2)
+    rouge (4.2.0)
     rpam2 (4.0.2)
     rqrcode (2.2.0)
       chunky_png (~> 1.0)
@@ -687,7 +681,7 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-prof (1.6.3)
     ruby-progressbar (1.13.0)
-    ruby-saml (1.15.0)
+    ruby-saml (1.16.0)
       nokogiri (>= 1.13.10)
       rexml
     ruby2_keywords (0.0.5)
@@ -717,7 +711,7 @@ GEM
       rufus-scheduler (~> 3.2)
       sidekiq (>= 6, < 8)
       tilt (>= 1.4.0)
-    sidekiq-unique-jobs (7.1.30)
+    sidekiq-unique-jobs (7.1.31)
       brpoplpush-redis_script (> 0.1.1, <= 2.0.0)
       concurrent-ruby (~> 1.0, >= 1.0.5)
       redis (< 5.0)
@@ -755,12 +749,12 @@ GEM
       attr_required (>= 0.0.5)
       httpclient (>= 2.4)
     sysexits (1.2.0)
-    temple (0.10.2)
+    temple (0.10.3)
     terminal-table (3.0.2)
       unicode-display_width (>= 1.1.1, < 3)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
-    test-prof (1.2.3)
+    test-prof (1.3.0)
     thor (1.3.0)
     tilt (2.3.0)
     timeout (0.4.1)
@@ -787,9 +781,9 @@ GEM
       tzinfo (>= 1.0.0)
     unf (0.1.4)
       unf_ext
-    unf_ext (0.0.8.2)
+    unf_ext (0.0.9.1)
     unicode-display_width (2.5.0)
-    uri (0.12.2)
+    uri (0.13.0)
     validate_email (0.1.6)
       activemodel (>= 3.0)
       mail (>= 2.2.5)
@@ -831,7 +825,7 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   active_model_serializers (~> 0.10)
@@ -854,7 +848,6 @@ DEPENDENCIES
   concurrent-ruby
   connection_pool
   database_cleaner-active_record
-  debug (~> 1.8)
   devise (~> 4.9)
   devise-two-factor (~> 4.1)
   devise_pam_authenticatable2 (~> 9.2)
@@ -880,7 +873,6 @@ DEPENDENCIES
   httplog (~> 1.6.2)
   i18n-tasks (~> 1.0)
   idn-ruby
-  irb (~> 1.8)
   json-ld
   json-ld-preloaded (~> 3.2)
   json-schema (~> 4.0)
@@ -969,4 +961,4 @@ RUBY VERSION
    ruby 3.2.2p53
 
 BUNDLED WITH
-   2.4.20
+   2.4.22
