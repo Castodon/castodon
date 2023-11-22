@@ -12,3 +12,8 @@
 *.woff                        -text
 *.woff2                       -text
 spec/fixtures/requests/**     -text !eol
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+*.jpeg binary
