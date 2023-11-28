@@ -17,50 +17,22 @@
 
 * [Issues](https://github.com/castodon/castodon/issues)
 
-## Running with Docker Compose
-
-### Build from source code (Optional)
-
-Prerequisites -
-
-* Ubuntu, 22.04+
-* Docker, 20.10.10+
-* Docker Compose,  v2.12+
-
-```
-cd $ROOT_DIR
- ./cloudnative/admin/build.sh
- ./cloudnative/admin/push.sh
-```
-
-### Launch Services
-
-```
-cd $ROOT_DIR
- ./cloudnative/admin/start.sh
-```
-
-### Flush All
-
-Re provison services, drop all data.
-
-```
-cd $ROOT_DIR
- ./cloudnative/admin/flush.sh
-```
-
-### Clean Logs
-
-Drop all logs.
-
-```
-cd $ROOT_DIR
- ./cloudnative/admin/truncate.sh
-```
-
 ## Contribute
 
-TODO
+Pre-conditions, check out [https://docs.joinmastodon.org/dev/setup/](https://docs.joinmastodon.org/dev/setup/).
+
+### Start Services
+
+```
+cp .env.development.sample .env # modify .env
+./scripts/start-api-server.sh
+./scripts/start-sidekiq.sh
+./scripts/start-streaming-server.sh
+./scripts/start-webpack.sh
+```
+
+Then, open `http://127.0.0.1:3000/home`.
+
 
 # License
 
