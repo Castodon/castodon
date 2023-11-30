@@ -25,10 +25,10 @@ Pre-conditions, check out [https://docs.joinmastodon.org/dev/setup/](https://doc
 
 ```
 cp .env.development.sample .env # modify .env
-./scripts/start-api-server.sh
-./scripts/start-sidekiq.sh
-./scripts/start-streaming-server.sh
-./scripts/start-webpack.sh
+./bin/start-api-server.sh
+./bin/start-sidekiq.sh
+./bin/start-streaming-server.sh
+./bin/start-webpack.sh
 ```
 
 Then, open `http://127.0.0.1:3000/home`.
