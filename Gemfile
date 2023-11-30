@@ -224,3 +224,5 @@ gem 'net-http', '~> 0.4.0'
 gem 'rubyzip', '~> 2.3'
 
 gem 'hcaptcha', '~> 7.1'
+
+gem 'chatoperastore', '~> 0.0.8'
