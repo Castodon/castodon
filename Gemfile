@@ -225,4 +225,4 @@ gem 'rubyzip', '~> 2.3'
 
 gem 'hcaptcha', '~> 7.1'
 
-gem 'chatoperastore', '~> 0.0.8'
+gem 'chatoperastore', '~> 0.0.9'
