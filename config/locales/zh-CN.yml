@@ -1625,6 +1625,7 @@ zh-CN:
     strikes: 操作记录
     two_factor_authentication: 双因素认证
     webauthn_authentication: 安全密钥
+    membership_subscriptions: 会员订阅
   statuses:
     attached:
       audio:
