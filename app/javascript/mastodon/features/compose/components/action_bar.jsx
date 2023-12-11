@@ -11,6 +11,7 @@ import DropdownMenuContainer from '../../../containers/dropdown_menu_container';
 
 const messages = defineMessages({
   edit_profile: { id: 'account.edit_profile', defaultMessage: 'Edit profile' },
+  membership_subscription: { id: 'navigation_bar.membership_subscription', defaultMessage: 'membershipSubscription' },
   pins: { id: 'navigation_bar.pins', defaultMessage: 'Pinned posts' },
   preferences: { id: 'navigation_bar.preferences', defaultMessage: 'Preferences' },
   follow_requests: { id: 'navigation_bar.follow_requests', defaultMessage: 'Follow requests' },
@@ -43,6 +44,7 @@ class ActionBar extends PureComponent {
     let menu = [];
 
     menu.push({ text: intl.formatMessage(messages.edit_profile), href: '/settings/profile' });
+    menu.push({ text: intl.formatMessage(messages.membership_subscription), href: '/membershipSubscription' });
     menu.push({ text: intl.formatMessage(messages.preferences), href: '/settings/preferences' });
     menu.push({ text: intl.formatMessage(messages.pins), to: '/pinned' });
     menu.push(null);
