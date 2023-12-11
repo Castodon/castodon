@@ -15,6 +15,8 @@ import { ReactComponent as SearchIcon } from '@material-symbols/svg-600/outlined
 import { ReactComponent as SettingsIcon } from '@material-symbols/svg-600/outlined/settings-fill.svg';
 import { ReactComponent as StarIcon } from '@material-symbols/svg-600/outlined/star-fill.svg';
 import { ReactComponent as TagIcon } from '@material-symbols/svg-600/outlined/tag.svg';
+import { ReactComponent as SubscriptionIcon} from '@material-symbols/svg-600/outlined/subscriptions-fill.svg';
+
 
 import { WordmarkLogo } from 'mastodon/components/logo';
 import { NavigationPortal } from 'mastodon/components/navigation_portal';
@@ -30,6 +32,8 @@ import SignInBanner from './sign_in_banner';
 
 const messages = defineMessages({
   home: { id: 'tabs_bar.home', defaultMessage: 'Home' },
+  membership_subscription: { id: 'navigation_bar.membership_subscription', defaultMessage: 'membershipSubscription' },
+
   notifications: { id: 'tabs_bar.notifications', defaultMessage: 'Notifications' },
   explore: { id: 'explore.title', defaultMessage: 'Explore' },
   firehose: { id: 'column.firehose', defaultMessage: 'Live feeds' },
@@ -124,6 +128,8 @@ class NavigationPanel extends Component {
             <hr />
 
             <ColumnLink transparent href='/settings/preferences' icon='cog' iconComponent={SettingsIcon} text={intl.formatMessage(messages.preferences)} />
+            <ColumnLink transparent href='/membershipSubscription' icon='membershipSubscription' iconComponent={SubscriptionIcon} text={intl.formatMessage(messages.membership_subscription)} />
+
           </>
         )}
 
