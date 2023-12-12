@@ -177,7 +177,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :memberships, only: [:show, :detail]
+  resource :memberships, only: [:show, :create] do
+    get 'refresh'
+    delete 'cancel'
+  end
   resource :relationships, only: [:show, :update]
   resource :statuses_cleanup, controller: :statuses_cleanup, only: [:show, :update]
 

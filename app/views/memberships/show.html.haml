@@ -4,11 +4,24 @@
 - content_for :header_tags do
   = javascript_pack_tag 'admin', async: true, crossorigin: 'anonymous'
 
-%form.membership-form-add
-  %span.add-cert= t 'memberships.cert'
+- if @show_form
+  %form.membership-form-add{action: memberships_path, method: :post}
+    %span.add-cert= t 'memberships.cert'
 
-  %label{for: "setting-input"}= t 'memberships.flag'
-  %input.setting-text{type: "text"}
-  %span= t 'memberships.tip'
+    %label{for: "setting-input"}= t 'memberships.flag'
+    %input.setting-text{type: "text", name: "input_value", required: true}
+    %span= t 'memberships.tip'
 
-  %button 保存
+    %button{ type: "submit" }= t('memberships.save')
+- else
+  .membership-cert-info
+    .div-button
+      .content
+        %span 会员订阅
+        %span 信息同步时间:
+        %span 证书标识:
+        %span 证书状态:
+        %span 绑定日期:
+        %span 有效日期:
+      %button{ type: "submit" }= t('memberships.refresh')
+      %button{ type: "submit" }= t('memberships.cancel')

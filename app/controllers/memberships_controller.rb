@@ -7,21 +7,30 @@ class MembershipsController < ApplicationController
   before_action :set_body_classes
   before_action :set_cache_headers
 
-  helper_method :following_relationship?, :followed_by_relationship?, :mutual_relationship?
-
+  # 会员订阅渲染页面，通过haml渲染，不是通过react组件进行渲染
   def show
-    @form = Form::AccountBatch.new
+    # TODO  调研接口返回值来判断会员有效
+    flag = 1
+    # 根据接口返回值进行渲染不同的页面 flag：1 添加页面 0 :详情页面
+    if flag == 1
+      @show_form = true
+    else
+      @show_form = false
+    end
+
+    refresh unless @show_form
+
+  end
+  # TODO 进行保存会员信息
+  def create
+  end
+  # TODO 刷新页面会员信息
+  def refresh
   end
 
-  def detail
-    @form = Form::AccountBatch.new
+  # TODO 解绑
+  def cancel
   end
-
-
-
-
-
-
   def set_body_classes
     @body_classes = 'admin'
   end
