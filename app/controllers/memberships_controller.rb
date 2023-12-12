@@ -23,6 +23,7 @@ class MembershipsController < ApplicationController
   end
   # TODO 进行保存会员信息
   def create
+    input_value = params[:input_value]
   end
   # TODO 刷新页面会员信息
   def refresh
