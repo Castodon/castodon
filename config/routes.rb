@@ -177,7 +177,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resource :membership_subscriptions, only: [:show]
+  resource :memberships, only: [:show, :detail]
   resource :relationships, only: [:show, :update]
   resource :statuses_cleanup, controller: :statuses_cleanup, only: [:show, :update]
 

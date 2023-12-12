@@ -15,7 +15,7 @@ import { ReactComponent as SearchIcon } from '@material-symbols/svg-600/outlined
 import { ReactComponent as SettingsIcon } from '@material-symbols/svg-600/outlined/settings-fill.svg';
 import { ReactComponent as StarIcon } from '@material-symbols/svg-600/outlined/star-fill.svg';
 import { ReactComponent as TagIcon } from '@material-symbols/svg-600/outlined/tag.svg';
-import { ReactComponent as SubscriptionIcon} from '@material-symbols/svg-600/outlined/subscriptions-fill.svg';
+import { ReactComponent as SubscriptionIcon} from '@material-symbols/svg-600/outlined/shield-halved.svg';
 
 
 import { WordmarkLogo } from 'mastodon/components/logo';
@@ -128,7 +128,7 @@ class NavigationPanel extends Component {
             <hr />
 
             <ColumnLink transparent href='/settings/preferences' icon='cog' iconComponent={SettingsIcon} text={intl.formatMessage(messages.preferences)} />
-            <ColumnLink transparent href='/membershipSubscription' icon='membershipSubscription' iconComponent={SubscriptionIcon} text={intl.formatMessage(messages.membership_subscription)} />
+            <ColumnLink transparent href='/memberships' icon='membershipSubscription' iconComponent={SubscriptionIcon} text={intl.formatMessage(messages.membership_subscription)} />
 
           </>
         )}

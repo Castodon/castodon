@@ -44,7 +44,7 @@ class ActionBar extends PureComponent {
     let menu = [];
 
     menu.push({ text: intl.formatMessage(messages.edit_profile), href: '/settings/profile' });
-    menu.push({ text: intl.formatMessage(messages.membership_subscription), href: '/membershipSubscription' });
+    menu.push({ text: intl.formatMessage(messages.membership_subscription), href: '/memberships' });
     menu.push({ text: intl.formatMessage(messages.preferences), href: '/settings/preferences' });
     menu.push({ text: intl.formatMessage(messages.pins), to: '/pinned' });
     menu.push(null);

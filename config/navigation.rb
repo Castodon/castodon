@@ -10,7 +10,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     n.item :profile, safe_join([fa_icon('user fw'), t('settings.profile')]), settings_profile_path, if: -> { current_user.functional? && !self_destruct }, highlights_on: %r{/settings/profile|/settings/featured_tags|/settings/verification|/settings/privacy}
 
-    n.item :profile, safe_join([fa_icon('shield fw'), t('settings.membership_subscriptions')]), membership_subscriptions_path, if: -> { current_user.functional? && !self_destruct }
+    n.item :membership_subscriptions, safe_join([fa_icon('shield fw'), t('settings.membership_subscriptions')]), memberships_path, if: -> { current_user.functional? && !self_destruct }
 
     n.item :preferences, safe_join([fa_icon('cog fw'), t('settings.preferences')]), settings_preferences_path, if: -> { current_user.functional? && !self_destruct } do |s|
       s.item :appearance, safe_join([fa_icon('desktop fw'), t('settings.appearance')]), settings_preferences_appearance_path

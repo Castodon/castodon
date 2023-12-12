@@ -1540,6 +1540,11 @@ zh-CN:
     remove_selected_followers: 移除选中的关注者
     remove_selected_follows: 取消关注所选用户
     status: 账户状态
+  memberships:
+    cert: 添加新的证书
+    flag: 证书标识
+    tip: 购买证书到证书商店，https://store.Chatopera.com
+    save: 保存
   remote_follow:
     missing_resource: 无法确定你的账户的跳转 URL
   reports:

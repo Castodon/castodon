@@ -1,0 +1,14 @@
+- content_for :page_title do
+  = t('settings.membership_subscriptions')
+
+- content_for :header_tags do
+  = javascript_pack_tag 'admin', async: true, crossorigin: 'anonymous'
+
+%form.membership-form-add
+  %span.add-cert= t 'memberships.cert'
+
+  %label{for: "setting-input"}= t 'memberships.flag'
+  %input.setting-text{type: "text"}
+  %span= t 'memberships.tip'
+
+  %button 保存
