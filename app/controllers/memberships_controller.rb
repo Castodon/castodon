@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
+
+
 class MembershipsController < ApplicationController
+  include Admin::MembershipsHelper
   layout 'admin'
 
   before_action :authenticate_user!
@@ -9,10 +12,11 @@ class MembershipsController < ApplicationController
 
   # 会员订阅渲染页面，通过haml渲染，不是通过react组件进行渲染
   def show
-    # TODO  调研接口返回值来判断会员有效
-    flag = 1
-    # 根据接口返回值进行渲染不同的页面 flag：1 添加页面 0 :详情页面
-    if flag == 1
+    @form=Form::UserMemberships.new
+    # 调用会员接口返回值来判断会员有效
+    result= call_get_license_status_api("ddddd");
+    # 根据接口返回值进行渲染不同的页面 result：inuse 添加页面 其他 :详情页面
+    if result != 'unused'
       @show_form = true
     else
       @show_form = false
@@ -23,7 +27,20 @@ class MembershipsController < ApplicationController
   end
   # TODO 进行保存会员信息
   def create
-    input_value = params[:input_value]
+    input_value = params[:form_user_memberships][:license_id]
+=begin
+
+    if result[data].present?
+      user_id = current_user.id
+      create_at=Time.now
+      update_at=Time.now
+      github_username='CollectBugs'
+      # 报存用户会员证书信息
+
+    end
+=end
+    redirect_to memberships_path, notice: I18n.t('memberships.save_update_failure_msg')
+
   end
   # TODO 刷新页面会员信息
   def refresh

@@ -1545,6 +1545,7 @@ zh-CN:
     flag: 证书标识
     tip: 购买证书到证书商店，https://store.Chatopera.com
     save: 保存
+    save_update_failure_msg: 保存更新失败
     refresh: 刷新
     cancel: 解绑
   remote_follow:

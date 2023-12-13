@@ -5,23 +5,24 @@
   = javascript_pack_tag 'admin', async: true, crossorigin: 'anonymous'
 
 - if @show_form
-  %form.membership-form-add{action: memberships_path, method: :post}
-    %span.add-cert= t 'memberships.cert'
+  %h3= t('memberships.cert')
+  = simple_form_for @form, url: memberships_path, html: { method: :post, class: 'add-form-cert', novalidate: false } do |f|
+    .fields-row
+      .fields-row__column.fields-group.fields-row__column-6
+        = f.input :license_id, wrapper: :with_label, label: t('memberships.flag'), required: true, hint: t('memberships.tip')
+    .actions
+      = f.button :button, t('memberships.save'), type: :submit, class: 'button'
 
-    %label{for: "setting-input"}= t 'memberships.flag'
-    %input.setting-text{type: "text", name: "input_value", required: true}
-    %span= t 'memberships.tip'
-
-    %button{ type: "submit" }= t('memberships.save')
 - else
   .membership-cert-info
     .div-button
       .content
         %span 会员订阅
-        %span 信息同步时间:
-        %span 证书标识:
-        %span 证书状态:
-        %span 绑定日期:
-        %span 有效日期:
-      %button{ type: "submit" }= t('memberships.refresh')
-      %button{ type: "submit" }= t('memberships.cancel')
+        %span 信息同步时间: syn_time
+        %span 证书标识: license_id
+        %span 证书状态: status
+        %span 绑定日期: bind_time
+        %span 有效日期: valid_time
+      = button_to t('memberships.refresh'), refresh_memberships_path, method: :put, class: 'button-class'
+      = button_to t('memberships.cancel'), cancel_memberships_path, method: :delete, class: 'button-class'
+
