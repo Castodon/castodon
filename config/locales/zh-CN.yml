@@ -1545,9 +1545,15 @@ zh-CN:
     flag: 证书标识
     tip: 购买证书到证书商店，https://store.Chatopera.com
     save: 保存
-    save_update_failure_msg: 保存更新失败
+    save_failure_msg: 保存失败
+    save_success_msg: 保存成功
     refresh: 刷新
     cancel: 解绑
+    valid_time: 有效日期
+    bind_time: 绑定日期
+    status: 证书状态
+    license_id: 证书标识
+    syc_time: 信息同步时间
   remote_follow:
     missing_resource: 无法确定你的账户的跳转 URL
   reports:

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_06_183200) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_13_143642) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -1056,6 +1056,17 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_06_183200) do
     t.index ["user_id"], name: "index_user_invite_requests_on_user_id"
   end
 
+  create_table "user_memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "license_id"
+    t.string "github_username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["github_username"], name: "index_user_memberships_on_github_username", unique: true
+    t.index ["license_id"], name: "index_user_memberships_on_license_id", unique: true
+    t.index ["user_id"], name: "index_user_memberships_on_user_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "color", default: "", null: false
@@ -1270,6 +1281,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_06_183200) do
   add_foreign_key "tag_follows", "tags", on_delete: :cascade
   add_foreign_key "tombstones", "accounts", on_delete: :cascade
   add_foreign_key "user_invite_requests", "users", on_delete: :cascade
+  add_foreign_key "user_memberships", "users"
   add_foreign_key "users", "accounts", name: "fk_50500f500d", on_delete: :cascade
   add_foreign_key "users", "invites", on_delete: :nullify
   add_foreign_key "users", "oauth_applications", column: "created_by_application_id", on_delete: :nullify

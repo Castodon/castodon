@@ -17,12 +17,12 @@
   .membership-cert-info
     .div-button
       .content
-        %span 会员订阅
-        %span 信息同步时间: syn_time
-        %span 证书标识: license_id
-        %span 证书状态: status
-        %span 绑定日期: bind_time
-        %span 有效日期: valid_time
+        %span #{t('settings.membership_subscriptions')}
+        %span #{t('memberships.syc_time')}: #{@user_memberships.updated_at.strftime("%Y-%m-%d %H:%M:%S")}
+        %span #{t('memberships.license_id')}: #{@user_memberships.license_id}
+        %span #{t('memberships.status')}: status
+        %span #{t('memberships.bind_time')}: #{@user_memberships.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+        %span #{t('memberships.valid_time')}: valid_time
       = button_to t('memberships.refresh'), refresh_memberships_path, method: :put, class: 'button-class'
       = button_to t('memberships.cancel'), cancel_memberships_path, method: :delete, class: 'button-class'
 

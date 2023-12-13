@@ -12,34 +12,33 @@ class MembershipsController < ApplicationController
 
   # 会员订阅渲染页面，通过haml渲染，不是通过react组件进行渲染
   def show
-    @form=Form::UserMemberships.new
+    @form=Form::AddMemberships.new
     # 调用会员接口返回值来判断会员有效
-    result= call_get_license_status_api("ddddd");
+    #result= call_get_license_status_api("ddddd");
     # 根据接口返回值进行渲染不同的页面 result：inuse 添加页面 其他 :详情页面
-    if result != 'unused'
+    user_id = current_user.id
+    @user_memberships =UserMembership.find_by_user_id(user_id)
+
+    if @user_memberships.nil?
       @show_form = true
     else
       @show_form = false
     end
 
-    refresh unless @show_form
 
   end
   # TODO 进行保存会员信息
   def create
-    input_value = params[:form_user_memberships][:license_id]
-=begin
-
-    if result[data].present?
-      user_id = current_user.id
-      create_at=Time.now
-      update_at=Time.now
-      github_username='CollectBugs'
-      # 报存用户会员证书信息
-
+    input_value = params[:form_add_memberships][:license_id]
+    user_id = current_user.id
+    # 保存证书
+    membership = UserMembership.new(user_id: user_id, license_id: input_value,github_username: 'CollectBugs4',created_at: Time.now,updated_at: Time.now)
+    if membership.save
+      redirect_to memberships_path, notice: I18n.t('memberships.save_success_msg')
+    else
+      redirect_to memberships_path, notice: I18n.t('memberships.save_failure_msg')
     end
-=end
-    redirect_to memberships_path, notice: I18n.t('memberships.save_update_failure_msg')
+
 
   end
   # TODO 刷新页面会员信息
