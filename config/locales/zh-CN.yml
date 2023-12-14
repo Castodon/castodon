@@ -1543,11 +1543,19 @@ zh-CN:
   memberships:
     cert: 添加新的证书
     flag: 证书标识
-    tip: 购买证书到证书商店，https://store.Chatopera.com
+    tip: 购买证书到证书商店：
     save: 保存
     save_failure_msg: 保存失败
+    save_operate_failure_msg: 操作失败
     save_success_msg: 保存成功
+    cancel_success_msg: 解绑成功
+    cancel_failure_msg: 保存失败
+    save_expired_msg: 过期
+    save_exhausted_msg: 配额耗尽
+    save_notfound_msg: 证书不存在
     refresh: 刷新
+    refresh_success_msg: 刷新成功
+    refresh_failure_msg: 刷新失败
     cancel: 解绑
     valid_time: 有效日期
     bind_time: 绑定日期

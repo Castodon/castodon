@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-
-
 class MembershipsController < ApplicationController
   include Admin::MembershipsHelper
   layout 'admin'
@@ -12,42 +10,90 @@ class MembershipsController < ApplicationController
 
   # 会员订阅渲染页面，通过haml渲染，不是通过react组件进行渲染
   def show
-    @form=Form::AddMemberships.new
-    # 调用会员接口返回值来判断会员有效
-    #result= call_get_license_status_api("ddddd");
-    # 根据接口返回值进行渲染不同的页面 result：inuse 添加页面 其他 :详情页面
+    @form = Form::AddMemberships.new
     user_id = current_user.id
-    @user_memberships =UserMembership.find_by_user_id(user_id)
-
+    # 查询当前用户是否已经绑定证书
+    @user_memberships = UserMembership.find_by_user_id(user_id)
+    # 判断结果是否为空。为空显示展示页面
     if @user_memberships.nil?
+      @url = I18n.t('memberships.tip') + ENV['STORE_PRODUCT_URL']
       @show_form = true
     else
+      # 获取证书 信息
+      @status, @valid_time = call_get_license_basics_api(@user_memberships.license_id)
       @show_form = false
     end
-
-
   end
-  # TODO 进行保存会员信息
+
+  #  进行保存会员信息
   def create
+    # 获取前端传的表单参数
     input_value = params[:form_add_memberships][:license_id]
-    user_id = current_user.id
-    # 保存证书
-    membership = UserMembership.new(user_id: user_id, license_id: input_value,github_username: 'CollectBugs4',created_at: Time.now,updated_at: Time.now)
-    if membership.save
-      redirect_to memberships_path, notice: I18n.t('memberships.save_success_msg')
+    # 验证证书标识是否有效
+    result = call_get_license_status_api(input_value);
+    # 证书有效才进行保存
+    if result == 'inuse'
+      user_id = current_user.id
+      # 保存证书
+      membership = UserMembership.new(user_id: user_id, license_id: input_value, github_username: '', created_at: Time.now, updated_at: Time.now)
+      if membership.save
+        redirect_to memberships_path, notice: I18n.t('memberships.save_success_msg')
+      else
+        redirect_to memberships_path, notice: I18n.t('memberships.save_failure_msg')
+      end
     else
-      redirect_to memberships_path, notice: I18n.t('memberships.save_failure_msg')
+      save_result_notice(result)
+    end
+  end
+
+  #  刷新证书信息
+  def update
+    input_value = params[:form_add_memberships][:license_id]
+    result = call_get_license_status_api(input_value);
+    # 获取证书状态
+    if result == 'inuse'
+      user_id = current_user.id
+      # 更新证书导入时间
+      membership = UserMembership.find(user_id)
+      membership.updated_at = Time.now
+      if membership.save!
+        redirect_to memberships_path, notice: I18n.t('memberships.refresh_success_msg')
+      else
+        redirect_to memberships_path, notice: I18n.t('memberships.refresh_success_msg')
+      end
+    else
+      save_result_notice(result)
     end
 
-
-  end
-  # TODO 刷新页面会员信息
-  def refresh
   end
 
-  # TODO 解绑
-  def cancel
+  #  解绑
+  def destroy
+    user_id = current_user.id
+    user_membership = UserMembership.find_by(user_id: user_id)
+    if user_membership
+      user_membership.destroy
+      redirect_to memberships_path, notice: I18n.t('memberships.cancel_success_msg')
+    else
+      redirect_to memberships_path, notice: I18n.t('memberships.cancel_failure_msg')
+    end
   end
+
+  def save_result_notice(result)
+    case result
+    when 'expired'
+      notice_message = I18n.t('memberships.save_expired_msg')
+    when 'exhausted', 6
+      notice_message = I18n.t('memberships.save_exhausted_msg')
+    when 'notfound', 3
+      notice_message = I18n.t('memberships.save_notfound_msg')
+    else
+      notice_message = I18n.t('memberships.save_operate_failure_msg')
+    end
+
+    redirect_to memberships_path, notice: notice_message
+  end
+
   def set_body_classes
     @body_classes = 'admin'
   end

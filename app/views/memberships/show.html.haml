@@ -9,7 +9,7 @@
   = simple_form_for @form, url: memberships_path, html: { method: :post, class: 'add-form-cert', novalidate: false } do |f|
     .fields-row
       .fields-row__column.fields-group.fields-row__column-6
-        = f.input :license_id, wrapper: :with_label, label: t('memberships.flag'), required: true, hint: t('memberships.tip')
+        = f.input :license_id, wrapper: :with_label, label: t('memberships.flag'), required: true, hint: @url
     .actions
       = f.button :button, t('memberships.save'), type: :submit, class: 'button'
 
@@ -20,9 +20,12 @@
         %span #{t('settings.membership_subscriptions')}
         %span #{t('memberships.syc_time')}: #{@user_memberships.updated_at.strftime("%Y-%m-%d %H:%M:%S")}
         %span #{t('memberships.license_id')}: #{@user_memberships.license_id}
-        %span #{t('memberships.status')}: status
+        %span #{t('memberships.status')}:  #{@status}
         %span #{t('memberships.bind_time')}: #{@user_memberships.created_at.strftime("%Y-%m-%d %H:%M:%S")}
-        %span #{t('memberships.valid_time')}: valid_time
-      = button_to t('memberships.refresh'), refresh_memberships_path, method: :put, class: 'button-class'
-      = button_to t('memberships.cancel'), cancel_memberships_path, method: :delete, class: 'button-class'
-
+        %span #{t('memberships.valid_time')}: #{@valid_time}
+      = simple_form_for @form, url: memberships_path, html: {method: :patch, id: 'update_memberships' } do |f|
+        = f.hidden_field :license_id, value: @user_memberships.license_id
+      = button_tag t('memberships.refresh'), class: 'button', form: 'update_memberships'
+      = simple_form_for @form, url: memberships_path, html: {method: :delete, id: 'delete_memberships' } do |f|
+        = f.hidden_field :license_id, value: @user_memberships.license_id
+      = button_tag t('memberships.cancel'), class: 'button', form: 'delete_memberships'
