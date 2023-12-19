@@ -138,6 +138,7 @@
   "compose.language.change": "更改语言",
   "compose.language.search": "搜索语言...",
   "compose.published.body": "嘟文已发布。",
+  "compose.no.published.body": "抱歉,请先会员订阅。",
   "compose.published.open": "打开",
   "compose.saved.body": "嘟文已保存。",
   "compose_form.direct_message_warning_learn_more": "详细了解",

@@ -80,11 +80,12 @@ export const COMPOSE_SET_STATUS = 'COMPOSE_SET_STATUS';
 export const COMPOSE_FOCUS = 'COMPOSE_FOCUS';
 
 const messages = defineMessages({
-  uploadErrorLimit: { id: 'upload_error.limit', defaultMessage: 'File upload limit exceeded.' },
-  uploadErrorPoll:  { id: 'upload_error.poll', defaultMessage: 'File upload not allowed with polls.' },
-  open: { id: 'compose.published.open', defaultMessage: 'Open' },
-  published: { id: 'compose.published.body', defaultMessage: 'Post published.' },
-  saved: { id: 'compose.saved.body', defaultMessage: 'Post saved.' },
+  uploadErrorLimit: {id: 'upload_error.limit', defaultMessage: 'File upload limit exceeded.'},
+  uploadErrorPoll: {id: 'upload_error.poll', defaultMessage: 'File upload not allowed with polls.'},
+  open: {id: 'compose.published.open', defaultMessage: 'Open'},
+  published: {id: 'compose.published.body', defaultMessage: 'Post published.'},
+  no_published: {id: 'compose.no.published.body', defaultMessage: 'Post no published.'},
+  saved: {id: 'compose.saved.body', defaultMessage: 'Post saved.'},
 });
 
 export const ensureComposeIsVisible = (getState, routerHistory) => {
@@ -216,40 +217,47 @@ export function submitCompose(routerHistory) {
       if (routerHistory && (routerHistory.location.pathname === '/publish' || routerHistory.location.pathname === '/statuses/new') && window.history.state) {
         routerHistory.goBack();
       }
-
-      dispatch(insertIntoTagHistory(response.data.tags, status));
-      dispatch(submitComposeSuccess({ ...response.data }));
-
       // To make the app more responsive, immediately push the status
       // into the columns
       const insertIfOnline = timelineId => {
         const timeline = getState().getIn(['timelines', timelineId]);
-
         if (timeline && timeline.get('items').size > 0 && timeline.getIn(['items', 0]) !== null && timeline.get('online')) {
-          dispatch(updateTimeline(timelineId, { ...response.data }));
+          dispatch(updateTimeline(timelineId, {...response.data}));
         }
       };
-
-      if (statusId) {
-        dispatch(importFetchedStatus({ ...response.data }));
+      if (response.data.status !== undefined && !response.data.status) {
+        dispatch(insertIntoTagHistory([], status));
+        dispatch(submitComposeSuccess({...response.data}));
+        if (statusId === null) {
+          insertIfOnline('home');
+        }
+        dispatch(showAlert({
+          message: messages.no_published,
+          action: messages.open,
+          dismissAfter: 10000,
+          onClick: () =>  window.location.href = '/memberships',
+        }));
+      }else {
+        dispatch(insertIntoTagHistory(response.data.tags, status));
+        dispatch(submitComposeSuccess({...response.data}));
+        if (statusId) {
+          dispatch(importFetchedStatus({...response.data}));
+        }
+        if (statusId === null && response.data.visibility !== 'direct') {
+          insertIfOnline('home');
+        }
+        if (statusId === null && response.data.in_reply_to_id === null && response.data.visibility === 'public') {
+          insertIfOnline('community');
+          insertIfOnline('public');
+          insertIfOnline(`account:${response.data.account.id}`);
+        }
+        dispatch(showAlert({
+          message: statusId === null ? messages.published : messages.saved,
+          action: messages.open,
+          dismissAfter: 10000,
+          onClick: () => routerHistory.push(`/@${response.data.account.username}/${response.data.id}`),
+        }));
       }
-
-      if (statusId === null && response.data.visibility !== 'direct') {
-        insertIfOnline('home');
-      }
-
-      if (statusId === null && response.data.in_reply_to_id === null && response.data.visibility === 'public') {
-        insertIfOnline('community');
-        insertIfOnline('public');
-        insertIfOnline(`account:${response.data.account.id}`);
-      }
-
-      dispatch(showAlert({
-        message: statusId === null ? messages.published : messages.saved,
-        action: messages.open,
-        dismissAfter: 10000,
-        onClick: () => routerHistory.push(`/@${response.data.account.username}/${response.data.id}`),
-      }));
     }).catch(function (error) {
       dispatch(submitComposeFail(error));
     });

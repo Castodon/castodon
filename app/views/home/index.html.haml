@@ -3,5 +3,13 @@
     %meta{ name: 'robots', content: 'noindex' }/
 
   = render partial: 'shared/og'
-
+- if @show_alert
+  %div.home_alert
+    %span.normal-text
+      = t('memberships.home-tip')
+    %a{:href => "/memberships"}
+      %span.clickable-text
+        = t('memberships.home-memberships-tip')
 = render 'shared/web_app'
+
+

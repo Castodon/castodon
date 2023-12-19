@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::StatusesController < Api::BaseController
-  include Authorization
+  include Authorization, Admin::MembershipsHelper
 
   before_action -> { authorize_if_got_token! :read, :'read:statuses' }, except: [:create, :update, :destroy]
   before_action -> { doorkeeper_authorize! :write, :'write:statuses' }, only:   [:create, :update, :destroy]
@@ -54,24 +54,42 @@ class Api::V1::StatusesController < Api::BaseController
   end
 
   def create
-    @status = PostStatusService.new.call(
-      current_user.account,
-      text: status_params[:status],
-      thread: @thread,
-      media_ids: status_params[:media_ids],
-      sensitive: status_params[:sensitive],
-      spoiler_text: status_params[:spoiler_text],
-      visibility: status_params[:visibility],
-      language: status_params[:language],
-      scheduled_at: status_params[:scheduled_at],
-      application: doorkeeper_token.application,
-      poll: status_params[:poll],
-      allowed_mentions: status_params[:allowed_mentions],
-      idempotency: request.headers['Idempotency-Key'],
-      with_rate_limit: true
-    )
+    # 获取证书标识
+    user_id = current_user.id
+    membership = UserMembership.where(user_id: user_id).first
+    if membership
+      license_id = membership.license_id
+      # 获取证书状态
+      result = call_get_license_status_api(license_id);
+      if result == 'inuse'
+        # 扣减积分
+        write_result = call_license_write_api(license_id, 1)
+        if write_result == 0
+          @status = PostStatusService.new.call(
+            current_user.account,
+            text: status_params[:status],
+            thread: @thread,
+            media_ids: status_params[:media_ids],
+            sensitive: status_params[:sensitive],
+            spoiler_text: status_params[:spoiler_text],
+            visibility: status_params[:visibility],
+            language: status_params[:language],
+            scheduled_at: status_params[:scheduled_at],
+            application: doorkeeper_token.application,
+            poll: status_params[:poll],
+            allowed_mentions: status_params[:allowed_mentions],
+            idempotency: request.headers['Idempotency-Key'],
+            with_rate_limit: true
+          )
+          render json: @status, serializer: @status.is_a?(ScheduledStatus) ? REST::ScheduledStatusSerializer : REST::StatusSerializer
+        end
+      else
+        render json: { status: false}, status: 200
+      end
+    else
+      render json: { status: false}, status: 200
+    end
 
-    render json: @status, serializer: @status.is_a?(ScheduledStatus) ? REST::ScheduledStatusSerializer : REST::StatusSerializer
   rescue PostStatusService::UnexpectedMentionsError => e
     unexpected_accounts = ActiveModel::Serializer::CollectionSerializer.new(
       e.accounts,

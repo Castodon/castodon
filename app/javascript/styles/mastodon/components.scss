@@ -19,7 +19,19 @@
     transition: opacity 200ms ease;
   }
 }
-
+.home_alert{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  background-color: #858afa;
+  font-size: 15px;
+  color: white;
+  .normal-text{
+    display: inline-block;
+  }
+  .clickable-text{
+    display: inline-block;
+  }
+}
 .link-button {
   display: block;
   font-size: 15px;
