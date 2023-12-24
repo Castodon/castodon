@@ -39,7 +39,7 @@ module Admin::MembershipsHelper
       valid_time = DateTime.parse(valid_time).strftime("%Y-%m-%d %H:%M:%S") if valid_time.present?
       case status
       when 'inuse'
-        status = I18n.t('memberships.save_no_expired_msg')
+        status = I18n.t('memberships.save_inuse_msg')
       when 'expired'
         status = I18n.t('memberships.save_expired_msg')
       when 'exhausted'

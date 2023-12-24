@@ -1580,6 +1580,7 @@ en:
     cancel_success_msg: Unbundled
     cancel_failure_msg: Failure
     save_expired_msg: Expired
+    save_inuse_msg: Valid
     save_exhausted_msg: Exhausted
     save_notfound_msg: License not found
     refresh: Refresh
