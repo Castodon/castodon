@@ -85,6 +85,7 @@ const messages = defineMessages({
   open: {id: 'compose.published.open', defaultMessage: 'Open'},
   published: {id: 'compose.published.body', defaultMessage: 'Post published.'},
   no_published: {id: 'compose.no.published.body', defaultMessage: 'Post no published.'},
+  subscribe: {id: 'compose.published.subscribe', defaultMessage: 'Subscribe.'},
   saved: {id: 'compose.saved.body', defaultMessage: 'Post saved.'},
 });
 
@@ -233,8 +234,8 @@ export function submitCompose(routerHistory) {
         }
         dispatch(showAlert({
           message: messages.no_published,
-          action: messages.open,
-          dismissAfter: 10000,
+          action: messages.subscribe,
+          dismissAfter: 60000,
           onClick: () =>  window.location.href = '/memberships',
         }));
       }else {

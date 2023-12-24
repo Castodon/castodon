@@ -1567,6 +1567,31 @@ en:
     remove_selected_followers: Remove selected followers
     remove_selected_follows: Unfollow selected users
     status: Account status
+  memberships:
+    home-tip: Only support members posting and direct messages.
+    home-memberships-tip: Complete membership subscription.
+    cert: Add new certificate
+    flag: License ID
+    tip: Purchase License from certificate store
+    save: Save
+    save_failure_msg: Error
+    save_operate_failure_msg: Operation error
+    save_success_msg: Success
+    cancel_success_msg: Unbundled
+    cancel_failure_msg: Failure
+    save_expired_msg: Expired
+    save_exhausted_msg: Exhausted
+    save_notfound_msg: License not found
+    refresh: Refresh
+    refresh_success_msg: Pulled latest info
+    refresh_failure_msg: Fail to pull info
+    cancel: Unbundle
+    valid_time: Expired at
+    bind_time: Bind at
+    status: Status
+    license_id: License Id
+    license_id_check_message: Only letters, numbers and underscores are allowed
+    syc_time: Last Sync Time
   remote_follow:
     missing_resource: Could not find the required redirect URL for your account
   reports:
