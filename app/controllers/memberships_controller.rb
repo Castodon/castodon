@@ -17,7 +17,7 @@ class MembershipsController < ApplicationController
     # 判断结果是否为空。为空显示展示页面
     if @user_memberships.nil?
       hint_text = I18n.t('memberships.tip')
-      @url = hint_text+ view_context.link_to(ENV['STORE_PRODUCT_URL'], ENV['STORE_PRODUCT_URL'], html_options = {target: "_blank"})
+      @url = hint_text + " " + view_context.link_to(ENV['STORE_PRODUCT_URL'], ENV['STORE_PRODUCT_URL'], html_options = {target: "_blank"})
       @show_form = true
     else
       # 获取证书 信息

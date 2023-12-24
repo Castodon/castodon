@@ -1568,11 +1568,11 @@ en:
     remove_selected_follows: Unfollow selected users
     status: Account status
   memberships:
-    home-tip: Only support members posting and direct messages.
+    home-tip: Post and direct messages are available for users with membership.
     home-memberships-tip: Complete membership subscription.
-    cert: Add new certificate
+    cert: Add new license
     flag: License ID
-    tip: Purchase License from certificate store
+    tip: Purchase License from Chatopera Store
     save: Save
     save_failure_msg: Error
     save_operate_failure_msg: Operation error

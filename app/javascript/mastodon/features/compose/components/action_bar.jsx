@@ -11,7 +11,7 @@ import DropdownMenuContainer from '../../../containers/dropdown_menu_container';
 
 const messages = defineMessages({
   edit_profile: { id: 'account.edit_profile', defaultMessage: 'Edit profile' },
-  membership_subscription: { id: 'navigation_bar.membership_subscription', defaultMessage: 'membershipSubscription' },
+  membership_subscription: { id: 'navigation_bar.membership_subscription', defaultMessage: 'Membership' },
   pins: { id: 'navigation_bar.pins', defaultMessage: 'Pinned posts' },
   preferences: { id: 'navigation_bar.preferences', defaultMessage: 'Preferences' },
   follow_requests: { id: 'navigation_bar.follow_requests', defaultMessage: 'Follow requests' },

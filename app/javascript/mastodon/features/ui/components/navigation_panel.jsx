@@ -32,7 +32,7 @@ import ShieldHalved from "mastodon/components/ShieldHalved";
 
 const messages = defineMessages({
   home: { id: 'tabs_bar.home', defaultMessage: 'Home' },
-  membership_subscription: { id: 'navigation_bar.membership_subscription', defaultMessage: 'membershipSubscription' },
+  membership_subscription: { id: 'navigation_bar.membership_subscription', defaultMessage: 'Membership' },
 
   notifications: { id: 'tabs_bar.notifications', defaultMessage: 'Notifications' },
   explore: { id: 'explore.title', defaultMessage: 'Explore' },
