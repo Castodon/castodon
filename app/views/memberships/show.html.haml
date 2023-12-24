@@ -9,7 +9,7 @@
   = simple_form_for @form, url: memberships_path, html: { method: :post, class: 'add-form-cert', novalidate: false } do |f|
     .fields-row
       .fields-row__column.fields-group.fields-row__column-6
-        = f.input :license_id, wrapper: :with_label, label: t('memberships.flag'), required: true, hint: @url,input_html: { pattern: '^[a-zA-Z0-9_]*$', title: t('memberships.license_id_check_message') }
+        = f.input :license_id, wrapper: :with_label, label: t('memberships.flag'), required: true, hint: @url.html_safe,input_html: { pattern: '^[a-zA-Z0-9_]*$', title: t('memberships.license_id_check_message') }
     .actions
       = f.button :button, t('memberships.save'), type: :submit, class: 'button'
 
