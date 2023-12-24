@@ -16,7 +16,8 @@ class MembershipsController < ApplicationController
     @user_memberships = UserMembership.find_by_user_id(user_id)
     # 判断结果是否为空。为空显示展示页面
     if @user_memberships.nil?
-      @url = I18n.t('memberships.tip') + ENV['STORE_PRODUCT_URL']
+      hint_text = I18n.t('memberships.tip')
+      @url = hint_text+ view_context.link_to(ENV['STORE_PRODUCT_URL'], ENV['STORE_PRODUCT_URL'])
       @show_form = true
     else
       # 获取证书 信息
@@ -48,23 +49,22 @@ class MembershipsController < ApplicationController
 
   #  刷新证书信息
   def update
+    user_id = current_user.id
     input_value = params[:form_add_memberships][:license_id]
     result = call_get_license_status_api(input_value);
     # 获取证书状态
     if result == 'inuse'
-      user_id = current_user.id
       # 更新证书导入时间
-      membership = UserMembership.find(user_id)
+      membership = UserMembership.find_by_user_id(user_id)
       membership.updated_at = Time.now
       if membership.save!
         redirect_to memberships_path, notice: I18n.t('memberships.refresh_success_msg')
       else
-        redirect_to memberships_path, notice: I18n.t('memberships.refresh_success_msg')
+        redirect_to memberships_path, notice: I18n.t('memberships.refresh_failure_msg')
       end
     else
       save_result_notice(result)
     end
-
   end
 
   #  解绑

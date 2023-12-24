@@ -35,14 +35,15 @@ module Admin::MembershipsHelper
     if result['rc'] == 0
       data = result['data'][0]
       status = data['license']['status']
-      valid_time = data['effectivedateend']
+      valid_time = data['license']['effectivedateend']
+      valid_time = DateTime.parse(valid_time).strftime("%Y-%m-%d %H:%M:%S") if valid_time.present?
       case status
       when 'inuse'
-        status = I18n.t('memberships.save_notfound_msg')
+        status = I18n.t('memberships.save_no_expired_msg')
       when 'expired'
         status = I18n.t('memberships.save_expired_msg')
       when 'exhausted'
-        status = I18n.t('exhausted')
+        status = I18n.t('memberships.save_exhausted_msg')
       when 'notfound'
         status = I18n.t('memberships.save_notfound_msg')
       end
