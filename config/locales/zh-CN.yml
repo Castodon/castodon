@@ -1541,8 +1541,8 @@ zh-CN:
     remove_selected_follows: 取消关注所选用户
     status: 账户状态
   memberships:
-    home-tip: 使用发帖和私聊服务,
-    home-memberships-tip: 需要进行会员订阅
+    home-tip: 仅支持会员发帖和私信。完成
+    home-memberships-tip: 会员订阅
     cert: 添加新的证书
     flag: 证书标识
     tip: 购买证书到证书商店：

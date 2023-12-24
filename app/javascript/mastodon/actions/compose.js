@@ -83,6 +83,7 @@ const messages = defineMessages({
   uploadErrorLimit: {id: 'upload_error.limit', defaultMessage: 'File upload limit exceeded.'},
   uploadErrorPoll: {id: 'upload_error.poll', defaultMessage: 'File upload not allowed with polls.'},
   open: {id: 'compose.published.open', defaultMessage: 'Open'},
+  subscribe: {id: 'compose.published.subscribe', defaultMessage: 'Subscribe'},
   published: {id: 'compose.published.body', defaultMessage: 'Post published.'},
   no_published: {id: 'compose.no.published.body', defaultMessage: 'Post no published.'},
   saved: {id: 'compose.saved.body', defaultMessage: 'Post saved.'},
@@ -233,7 +234,7 @@ export function submitCompose(routerHistory) {
         }
         dispatch(showAlert({
           message: messages.no_published,
-          action: messages.open,
+          action: messages.subscribe,
           dismissAfter: 10000,
           onClick: () =>  window.location.href = '/memberships',
         }));

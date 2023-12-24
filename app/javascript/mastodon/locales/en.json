@@ -137,6 +137,8 @@
   "compose.language.change": "Change language",
   "compose.language.search": "Search languages...",
   "compose.published.body": "Post published.",
+  "compose.no.published.body": "Post no published.",
+  "compose.published.subscribe": "OPEN",
   "compose.published.open": "Open",
   "compose.saved.body": "Post saved.",
   "compose_form.direct_message_warning_learn_more": "Learn more",

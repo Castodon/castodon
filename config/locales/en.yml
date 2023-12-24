@@ -1567,6 +1567,9 @@ en:
     remove_selected_followers: Remove selected followers
     remove_selected_follows: Unfollow selected users
     status: Account status
+  memberships:
+    home-tip: Home Tip
+    home-memberships-tip: Home Memberships Tip
   remote_follow:
     missing_resource: Could not find the required redirect URL for your account
   reports:
