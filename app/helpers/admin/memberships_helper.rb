@@ -57,14 +57,15 @@ module Admin::MembershipsHelper
 
   #  扣减配额
   def call_license_write_api(license_id, consumes)
+    # 打印日志
+    user_id = current_user.id
     quota_wd_client = Chatoperastore::QuotaWdClient.new
     # 从服务环境变量读取
     server_inst_id = ENV['STORE_SERVINST_ID']
     service_name = ENV['STORE_SERVICE_NAME']
     Rails.logger.info "method:license_write,user_id:#{user_id}, license_id:#{license_id},server_inst_id:#{server_inst_id},service_name:#{service_name}"
     result = quota_wd_client.write(license_id, server_inst_id, service_name, consumes)
-    # 打印日志
-    user_id = current_user.id
+
     Rails.logger.info "user_id:#{user_id}, result:#{result}"
     result['rc']
   end
