@@ -1593,6 +1593,9 @@ en:
     license_id: License Id
     license_id_check_message: Only letters, numbers and underscores are allowed
     syc_time: Last Sync Time
+    owner_nickname: Owner's Nickname
+    license_more_details: Find more information on Chatopera Store, such as upgrades and extensions, quotas, and more
+    dont_lieout_licenseinfo: Please keep the certificate identification properly, leaking it to others may cause unexpected consumption of quota
   remote_follow:
     missing_resource: Could not find the required redirect URL for your account
   reports:

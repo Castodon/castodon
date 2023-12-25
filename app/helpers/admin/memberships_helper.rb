@@ -32,9 +32,11 @@ module Admin::MembershipsHelper
     Rails.logger.info "user_id:#{user_id}, result:#{result}"
     status = ''
     valid_time = ''
+    owner_nickname = ''
     if result['rc'] == 0
       data = result['data'][0]
       status = data['license']['status']
+      owner_nickname = data['user']['nickname']
       valid_time = data['license']['effectivedateend']
       valid_time = DateTime.parse(valid_time).strftime("%Y-%m-%d %H:%M:%S") if valid_time.present?
       case status
@@ -53,7 +55,7 @@ module Admin::MembershipsHelper
       status = I18n.t('memberships.save_exhausted_msg')
     end
 
-    [status, valid_time]
+    [status, valid_time, owner_nickname]
   end
 
   #  扣减配额

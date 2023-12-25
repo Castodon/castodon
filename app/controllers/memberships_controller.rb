@@ -21,7 +21,7 @@ class MembershipsController < ApplicationController
       @show_form = true
     else
       # 获取证书 信息
-      @status, @valid_time = call_get_license_basics_api(@user_memberships.license_id)
+      @status, @valid_time, @owner_nickname = call_get_license_basics_api(@user_memberships.license_id)
       @show_form = false
     end
   end

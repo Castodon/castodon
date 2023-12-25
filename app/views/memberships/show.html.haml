@@ -18,11 +18,14 @@
     .div-button
       .content
         %span #{t('settings.membership_subscriptions')}
-        %span #{t('memberships.syc_time')}: #{@user_memberships.updated_at.strftime("%Y-%m-%d %H:%M:%S")}
-        %span #{t('memberships.license_id')}: #{@user_memberships.license_id}
-        %span #{t('memberships.status')}:  #{@status}
-        %span #{t('memberships.bind_time')}: #{@user_memberships.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+        %span #{t('memberships.license_id')}: #{@user_memberships.license_id} (#{t("memberships.dont_lieout_licenseinfo")})
+        %span #{t('memberships.status')}: #{@status}
+        %span #{t('memberships.owner_nickname')}: #{@owner_nickname}
         %span #{t('memberships.valid_time')}: #{@valid_time}
+        %span #{t('memberships.bind_time')}: #{@user_memberships.created_at.strftime("%Y-%m-%d %H:%M:%S")}
+        %span #{t('memberships.syc_time')}: #{@user_memberships.updated_at.strftime("%Y-%m-%d %H:%M:%S")}
+        = link_to("https://store.chatopera.com/license/#{@user_memberships.license_id}", html_options = {target: "_blank", style: "color: white;"}) do
+          %span #{t('memberships.license_more_details')}
       = simple_form_for @form, url: memberships_path, html: {method: :patch, id: 'update_memberships' } do |f|
         = f.hidden_field :license_id, value: @user_memberships.license_id
       = button_tag t('memberships.refresh'), class: 'button', form: 'update_memberships'
