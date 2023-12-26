@@ -1,4 +1,4 @@
-#! /bin/bash 
+#! /bin/bash
 ###########################################
 #
 ###########################################
@@ -14,8 +14,9 @@ export DATE_WITH_TIME=`date "+%Y%m%d-%H%M%S"` #add %3N as we want millisecond to
 
 # functions
 
-# main 
+# main
 [ -z "${BASH_SOURCE[0]}" -o "${BASH_SOURCE[0]}" = "$0" ] || return
 cd $baseDir/..
 set -x
+export RAILS_ENV=development
 bin/webpack-dev-server

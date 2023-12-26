@@ -426,6 +426,8 @@
   "navigation_bar.public_timeline": "Federated timeline",
   "navigation_bar.search": "Search",
   "navigation_bar.security": "Security",
+  "navigation_bar.membership_subscription" : "Membership",
+  "navigation_bar.download_clientapps" : "Download Apps",
   "not_signed_in_indicator.not_signed_in": "You need to login to access this resource.",
   "notification.admin.report": "{name} reported {target}",
   "notification.admin.sign_up": "{name} signed up",

@@ -15,6 +15,7 @@ import { ReactComponent as SearchIcon } from '@material-symbols/svg-600/outlined
 import { ReactComponent as SettingsIcon } from '@material-symbols/svg-600/outlined/settings-fill.svg';
 import { ReactComponent as StarIcon } from '@material-symbols/svg-600/outlined/star-fill.svg';
 import { ReactComponent as TagIcon } from '@material-symbols/svg-600/outlined/tag.svg';
+import { ReactComponent as DownloadIcon } from '@material-symbols/svg-600/outlined/download.svg';
 
 
 import { WordmarkLogo } from 'mastodon/components/logo';
@@ -33,6 +34,7 @@ import ShieldHalved from "mastodon/components/ShieldHalved";
 const messages = defineMessages({
   home: { id: 'tabs_bar.home', defaultMessage: 'Home' },
   membership_subscription: { id: 'navigation_bar.membership_subscription', defaultMessage: 'Membership' },
+  download_clientapps: { id: 'navigation_bar.download_clientapps', defaultMessage: 'Download Apps' },
 
   notifications: { id: 'tabs_bar.notifications', defaultMessage: 'Notifications' },
   explore: { id: 'explore.title', defaultMessage: 'Explore' },
@@ -129,9 +131,10 @@ class NavigationPanel extends Component {
 
             <ColumnLink transparent href='/settings/preferences' icon='cog' iconComponent={SettingsIcon} text={intl.formatMessage(messages.preferences)} />
             <ColumnLink transparent href='/memberships' icon='membershipSubscription' iconComponent={ShieldHalved} text={intl.formatMessage(messages.membership_subscription)} />
-
+            <ColumnLink transparent href='https://dwz.chatopera.com/ylIWCT' icon='download' iconComponent={DownloadIcon} text={intl.formatMessage(messages.download_clientapps)} target='_blank' />
           </>
         )}
+
 
         <div className='navigation-panel__legal'>
           <hr />

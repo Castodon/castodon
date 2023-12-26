@@ -432,6 +432,7 @@
   "navigation_bar.search": "搜索",
   "navigation_bar.security": "安全",
   "navigation_bar.membership_subscription" : "会员订阅",
+  "navigation_bar.download_clientapps" : "下载客户端",
   "not_signed_in_indicator.not_signed_in": "您需要登录才能访问此资源。",
   "notification.admin.report": "{name} 举报了 {target}",
   "notification.admin.sign_up": "{name} 注册了",
