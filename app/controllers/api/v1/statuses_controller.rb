@@ -59,9 +59,7 @@ class Api::V1::StatusesController < Api::BaseController
     membership = UserMembership.where(user_id: user_id).first
     if membership
       license_id = membership.license_id
-      # 获取证书状态
-      result = call_get_license_status_api(license_id);
-      if result == 'inuse'
+      begin
         # 扣减积分
         write_result = call_license_write_api(license_id, 1)
         if write_result == 0
@@ -82,9 +80,13 @@ class Api::V1::StatusesController < Api::BaseController
             with_rate_limit: true
           )
           render json: @status, serializer: @status.is_a?(ScheduledStatus) ? REST::ScheduledStatusSerializer : REST::StatusSerializer
+        else
+          # can not consume quota, maybe the license is invalid.
+          # TODO need check the response to get details, return with reason.
+          render json: { status: false}, status: 200
         end
-      else
-        render json: { status: false}, status: 200
+      rescue Exception => e
+        render json: { error: e.message }, status: 422
       end
     else
       render json: { status: false}, status: 200
