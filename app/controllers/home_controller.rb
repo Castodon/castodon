@@ -8,20 +8,25 @@ class HomeController < ApplicationController
     # 获取证书id
     if user_signed_in?
       user_id = current_user.id
-      membership = UserMembership.where(user_id: user_id).first
-      if membership
-        license_id = membership.license_id
-        # 获取证书状态
-        result = call_get_license_status_api(license_id);
-        if result == 'inuse'
+      user_memberships = UserMembership.find_by_user_id(user_id)
+      if user_memberships
+        license_id=user_memberships.license_id
+        # 判断是否平台正式标识 以PLT开头
+        if license_id.start_with?("PLT")
+          # 字符串以 PLT 开头
           @show_alert = false
         else
-          @show_alert = true
+          # 获取证书状态
+          result = call_get_license_status_api(license_id);
+          if result == 'inuse'
+            @show_alert = false
+          else
+            @show_alert = true
+          end
         end
       else
         @show_alert = true
       end
-
     end
   end
 end

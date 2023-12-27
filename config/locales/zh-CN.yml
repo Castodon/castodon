@@ -1564,6 +1564,7 @@ zh-CN:
     bind_time: 绑定日期
     status: 证书状态
     license_id: 证书标识
+    plt_message: 您拥有一个平台证书，无须购买会员订阅。
     license_id_check_message: 不符合格式要求,必须以L开头,包含字母、数字、下划线任意组合
     syc_time: 信息同步时间
     owner_nickname: 所有者昵称

@@ -560,21 +560,34 @@ body,
   }
 
 }
+.membership-plt-info{
+  color: #606984;
+  background: #282c37;
+  text-align: center;
+  padding: 20px;
+  font-size: 15px;
+  font-weight: 400;
+  cursor: default;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  justify-content: center;
+}
 .membership-cert-info {
   padding: 15px;
   flex: 1 1 auto;
-  .content{
-    margin-bottom: 40px;
-    width: 400px;
-    span{
-      display: block;
-      margin-bottom: 15px;
-    }
-  }
-  .div-button{
+  .div{
     display: flex;
     justify-content: flex-end;
     gap: 15px;
+    .content{
+      margin-bottom: 40px;
+      width: 400px;
+      span{
+        display: block;
+        margin-bottom: 15px;
+      }
+    }
     button{
       margin-left: auto;
       height: 30px;
@@ -583,7 +596,6 @@ body,
       border: none;
     }
   }
-
 }
 
 

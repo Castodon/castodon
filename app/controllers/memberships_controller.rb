@@ -11,6 +11,8 @@ class MembershipsController < ApplicationController
   # 会员订阅渲染页面，通过haml渲染，不是通过react组件进行渲染
   def show
     @form = Form::AddMemberships.new
+    @show_form = false
+    @SHOW_PLT = false
     user_id = current_user.id
     # 查询当前用户是否已经绑定证书
     @user_memberships = UserMembership.find_by_user_id(user_id)
@@ -20,9 +22,15 @@ class MembershipsController < ApplicationController
       @url = hint_text + " " + view_context.link_to(ENV['STORE_PRODUCT_URL'], ENV['STORE_PRODUCT_URL'], html_options = {target: "_blank"})
       @show_form = true
     else
+      license_id=@user_memberships.license_id
+      # 判断是否是平台证书
+      if license_id.start_with?("PLT")
+        # 字符串以 PLT 开头
+        @SHOW_PLT = true
+      else
       # 获取证书 信息
-      @status, @valid_time, @owner_nickname = call_get_license_basics_api(@user_memberships.license_id)
-      @show_form = false
+      @status, @valid_time, @owner_nickname = call_get_license_basics_api(license_id)
+      end
     end
   end
 

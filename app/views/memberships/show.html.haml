@@ -1,8 +1,7 @@
-- content_for :page_title do
-  = t('settings.membership_subscriptions')
-
 - content_for :header_tags do
   = javascript_pack_tag 'admin', async: true, crossorigin: 'anonymous'
+- content_for :page_title do
+  = t('settings.membership_subscriptions')
 
 - if @show_form
   %h3= t('memberships.cert')
@@ -13,9 +12,12 @@
     .actions
       = f.button :button, t('memberships.save'), type: :submit, class: 'button'
 
+- elsif @SHOW_PLT
+  .membership-plt-info
+    %span #{t('memberships.plt_message')}
 - else
   .membership-cert-info
-    .div-button
+    .div
       .content
         %span #{t('settings.membership_subscriptions')}
         %span #{t('memberships.license_id')}: #{@user_memberships.license_id} (#{t("memberships.dont_lieout_licenseinfo")})
