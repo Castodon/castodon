@@ -233,27 +233,8 @@ export function submitCompose(routerHistory) {
         }
       };
       if (response.data.status !== undefined && !response.data.status) {
-        dispatch(insertIntoTagHistory([], status));
-        dispatch(submitComposeSuccess({...response.data}));
-        if (statusId === null) {
-          insertIfOnline('home');
-        }
-        if(response.data.write_result === 6){
-          dispatch(showAlert({
-            message: messages.no_valid,
-            action: messages.renewal_extension,
-            dismissAfter: 10000,
-            onClick: () =>  window.location.href = 'https://store.chatopera.com/license/'+response.data.license_id,
-          }));
-        }else{
-          dispatch(showAlert({
-            message: messages.no_published,
-            action: messages.subscribe,
-            dismissAfter: 10000,
-            onClick: () =>  window.location.href = '/memberships',
-          }));
-        }
-
+        //处理会员响应逻辑
+        handleMembershipsResponse(insertIfOnline, dispatch, statusId, response,status);
       }else {
         dispatch(insertIntoTagHistory(response.data.tags, status));
         dispatch(submitComposeSuccess({...response.data}));
@@ -279,6 +260,30 @@ export function submitCompose(routerHistory) {
       dispatch(submitComposeFail(error));
     });
   };
+}
+function handleMembershipsResponse(insertIfOnline, dispatch, statusId, response, status) {
+  dispatch(insertIntoTagHistory([], status));
+  dispatch(submitComposeSuccess({...response.data}));
+
+  if (statusId === null) {
+    insertIfOnline('home');
+  }
+
+  if (response.data.write_result === 6) {
+    dispatch(showAlert({
+      message: messages.no_valid,
+      action: messages.renewal_extension,
+      dismissAfter: 10000,
+      onClick: () =>  window.location.href = 'https://store.chatopera.com/license/'+response.data.license_id,
+    }));
+  } else {
+    dispatch(showAlert({
+      message: messages.no_published,
+      action: messages.subscribe,
+      dismissAfter: 10000,
+      onClick: () =>  window.location.href = '/memberships',
+    }));
+  }
 }
 
 export function submitComposeRequest() {
