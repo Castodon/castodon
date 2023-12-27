@@ -82,8 +82,7 @@ class Api::V1::StatusesController < Api::BaseController
           render json: @status, serializer: @status.is_a?(ScheduledStatus) ? REST::ScheduledStatusSerializer : REST::StatusSerializer
         else
           # can not consume quota, maybe the license is invalid.
-          # TODO need check the response to get details, return with reason.
-          render json: { status: false}, status: 200
+          render json: { status: false,write_result:write_result,license_id:license_id}, status: 200
         end
       rescue Exception => e
         render json: { error: e.message }, status: 422

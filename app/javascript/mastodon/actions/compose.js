@@ -86,7 +86,8 @@ const messages = defineMessages({
   subscribe: {id: 'compose.published.subscribe', defaultMessage: 'Subscribe'},
   published: {id: 'compose.published.body', defaultMessage: 'Post published.'},
   no_published: {id: 'compose.no.published.body', defaultMessage: 'Post no published.'},
-  subscribe: {id: 'compose.published.subscribe', defaultMessage: 'Subscribe.'},
+  no_valid: {id: 'compose.no.valid.body', defaultMessage: 'License no valid.'},
+  renewal_extension: {id: 'compose.renewal.extension.body', defaultMessage: 'License renewal extension'},
   saved: {id: 'compose.saved.body', defaultMessage: 'Post saved.'},
 });
 
@@ -182,6 +183,8 @@ export function submitCompose(routerHistory) {
     // necessarily been changed on the server. Do it now in the same
     // API call.
     let media_attributes;
+    let write_result;
+    let license_id;
     if (statusId !== null) {
       media_attributes = media.map(item => {
         let focus;
@@ -211,6 +214,8 @@ export function submitCompose(routerHistory) {
         visibility: getState().getIn(['compose', 'privacy']),
         poll: getState().getIn(['compose', 'poll'], null),
         language: getState().getIn(['compose', 'language']),
+        write_result,
+        license_id,
       },
       headers: {
         'Idempotency-Key': getState().getIn(['compose', 'idempotencyKey']),
@@ -233,12 +238,22 @@ export function submitCompose(routerHistory) {
         if (statusId === null) {
           insertIfOnline('home');
         }
-        dispatch(showAlert({
-          message: messages.no_published,
-          action: messages.subscribe,
-          dismissAfter: 10000,
-          onClick: () =>  window.location.href = '/memberships',
-        }));
+        if(response.data.write_result === 6){
+          dispatch(showAlert({
+            message: messages.no_valid,
+            action: messages.renewal_extension,
+            dismissAfter: 10000,
+            onClick: () =>  window.location.href = 'https://store.chatopera.com/license/'+response.data.license_id,
+          }));
+        }else{
+          dispatch(showAlert({
+            message: messages.no_published,
+            action: messages.subscribe,
+            dismissAfter: 10000,
+            onClick: () =>  window.location.href = '/memberships',
+          }));
+        }
+
       }else {
         dispatch(insertIntoTagHistory(response.data.tags, status));
         dispatch(submitComposeSuccess({...response.data}));
