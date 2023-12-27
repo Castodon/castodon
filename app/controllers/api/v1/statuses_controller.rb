@@ -59,9 +59,14 @@ class Api::V1::StatusesController < Api::BaseController
     membership = UserMembership.where(user_id: user_id).first
     if membership
       license_id = membership.license_id
+      # 判断是否是平台证书
       begin
-        # 扣减积分
-        write_result = call_license_write_api(license_id, 1)
+        # 扣减积分，如果是平台标识，不进行扣减分
+        if license_id.start_with?("PLT")
+          write_result = 0
+        else
+          write_result = call_license_write_api(license_id, 1)
+        end
         if write_result == 0
           @status = PostStatusService.new.call(
             current_user.account,
