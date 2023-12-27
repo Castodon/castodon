@@ -103,7 +103,9 @@ class ComposeForm extends ImmutablePureComponent {
     const { isSubmitting, isChangingUpload, isUploading, anyMedia } = this.props;
     const fulltext = this.getFulltextForCharacterCounting();
     const isOnlyWhitespace = fulltext.length !== 0 && fulltext.trim().length === 0;
-
+    if (fulltext) {
+      return true;
+    }
     return !(isSubmitting || isUploading || isChangingUpload || length(fulltext) > 500 || (isOnlyWhitespace && !anyMedia));
   };
 
@@ -119,7 +121,6 @@ class ComposeForm extends ImmutablePureComponent {
     }
 
     this.props.onSubmit(this.props.history || null);
-
     if (e) {
       e.preventDefault();
     }

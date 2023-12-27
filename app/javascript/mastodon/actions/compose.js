@@ -224,18 +224,17 @@ export function submitCompose(routerHistory) {
       if (routerHistory && (routerHistory.location.pathname === '/publish' || routerHistory.location.pathname === '/statuses/new') && window.history.state) {
         routerHistory.goBack();
       }
-      // To make the app more responsive, immediately push the status
-      // into the columns
-      const insertIfOnline = timelineId => {
-        const timeline = getState().getIn(['timelines', timelineId]);
-        if (timeline && timeline.get('items').size > 0 && timeline.getIn(['items', 0]) !== null && timeline.get('online')) {
-          dispatch(updateTimeline(timelineId, {...response.data}));
-        }
-      };
       if (response.data.status !== undefined && !response.data.status) {
-        //处理会员响应逻辑
-        handleMembershipsResponse(insertIfOnline, dispatch, statusId, response,status);
+        handleMembershipsResponse(dispatch, statusId, response,status);
       }else {
+        // To make the app more responsive, immediately push the status
+        // into the columns
+        const insertIfOnline = timelineId => {
+          const timeline = getState().getIn(['timelines', timelineId]);
+          if (timeline && timeline.get('items').size > 0 && timeline.getIn(['items', 0]) !== null && timeline.get('online')) {
+            dispatch(updateTimeline(timelineId, {...response.data}));
+          }
+        };
         dispatch(insertIntoTagHistory(response.data.tags, status));
         dispatch(submitComposeSuccess({...response.data}));
         if (statusId) {
@@ -261,13 +260,8 @@ export function submitCompose(routerHistory) {
     });
   };
 }
-function handleMembershipsResponse(insertIfOnline, dispatch, statusId, response, status) {
-  dispatch(insertIntoTagHistory([], status));
-  dispatch(submitComposeSuccess({...response.data}));
 
-  if (statusId === null) {
-    insertIfOnline('home');
-  }
+function handleMembershipsResponse(dispatch, statusId, response) {
 
   if (response.data.write_result === 6) {
     dispatch(showAlert({
@@ -298,7 +292,6 @@ export function submitComposeSuccess(status) {
     status: status,
   };
 }
-
 export function submitComposeFail(error) {
   return {
     type: COMPOSE_SUBMIT_FAIL,
