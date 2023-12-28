@@ -1682,6 +1682,7 @@ en:
     strikes: Moderation strikes
     two_factor_authentication: Two-factor Auth
     webauthn_authentication: Security keys
+    membership_subscriptions: Membership
   statuses:
     attached:
       audio:
