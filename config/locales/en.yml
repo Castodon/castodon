@@ -1591,6 +1591,7 @@ en:
     bind_time: Bind at
     status: Status
     license_id: License Id
+    plt_message: You own a platform premium license, enjoy it.
     license_id_check_message: Only letters, numbers and underscores are allowed
     syc_time: Last Sync Time
     owner_nickname: Owner's Nickname
