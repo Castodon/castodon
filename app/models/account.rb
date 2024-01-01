@@ -37,7 +37,7 @@
 #  featured_collection_url       :string
 #  fields                        :jsonb
 #  actor_type                    :string
-#  discoverable                  :boolean
+#  discoverable                  :boolean          default(TRUE)
 #  also_known_as                 :string           is an Array
 #  silenced_at                   :datetime
 #  suspended_at                  :datetime
