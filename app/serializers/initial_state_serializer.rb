@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class InitialStateSerializer < ActiveModel::Serializer
-  include RoutingHelper
+  include RoutingHelper, Admin::MembershipsHelper
 
   attributes :meta, :compose, :accounts,
              :media_attachments, :settings,
@@ -74,6 +74,7 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:default_privacy]   = object.visibility || object.current_account.user.setting_default_privacy
       store[:default_sensitive] = object.current_account.user.setting_default_sensitive
       store[:default_language]  = object.current_account.user.preferred_posting_language
+      store[:membership] = checkMembership(object.current_account.user.id)
     end
 
     store[:text] = object.text if object.text
