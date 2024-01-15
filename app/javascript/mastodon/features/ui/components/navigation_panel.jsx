@@ -66,7 +66,7 @@ class NavigationPanel extends Component {
   };
 
   render () {
-    const { intl } = this.props;
+    const { intl,membership} = this.props;
     const { signedIn, disabledAccountId } = this.context.identity;
 
     let banner = undefined;
@@ -131,7 +131,9 @@ class NavigationPanel extends Component {
 
             <ColumnLink transparent href='/settings/preferences' icon='cog' iconComponent={SettingsIcon} text={intl.formatMessage(messages.preferences)} />
             <ColumnLink transparent href='/memberships' icon='membershipSubscription' iconComponent={ShieldHalved} text={intl.formatMessage(messages.membership_subscription)} />
-            <ColumnLink transparent href='https://dwz.chatopera.com/ylIWCT' icon='download' iconComponent={DownloadIcon} text={intl.formatMessage(messages.download_clientapps)} target='_blank' />
+            {!membership && (
+              <ColumnLink transparent href='https://dwz.chatopera.com/ylIWCT' icon='download' iconComponent={DownloadIcon} text={intl.formatMessage(messages.download_clientapps)} target='_blank' />
+            )}
           </>
         )}
 
