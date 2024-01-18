@@ -1552,6 +1552,7 @@ zh-CN:
     save_success_msg: 保存成功
     cancel_success_msg: 解绑成功
     cancel_failure_msg: 保存失败
+    save_invalid_msg: 无法导入证书，确认证书有效
     save_expired_msg: 过期
     save_inuse_msg: 证书有效
     save_exhausted_msg: 配额耗尽
