@@ -30,6 +30,7 @@ class MembershipsController < ApplicationController
       else
       # 获取证书 信息
       @status, @valid_time, @owner_nickname = call_get_license_basics_api(license_id)
+      @status=status_convert(@status)
       end
     end
   end
@@ -39,9 +40,10 @@ class MembershipsController < ApplicationController
     # 获取前端传的表单参数
     input_value = params[:form_add_memberships][:license_id]
     # 验证证书标识是否有效
-    result = call_get_license_status_api(input_value);
+    @status, @valid_time, @owner_nickname,product_shortId = call_get_license_basics_api(input_value)
+    last_part= ENV['STORE_PRODUCT_URL'].split("/").last
     # 证书有效才进行保存
-    if result == 'inuse'
+    if @status == 'inuse' && last_part==product_shortId
       user_id = current_user.id
       # 保存证书
       membership = UserMembership.new(user_id: user_id, license_id: input_value, github_username: '', created_at: Time.now, updated_at: Time.now)
@@ -50,8 +52,12 @@ class MembershipsController < ApplicationController
       else
         redirect_to memberships_path, notice: I18n.t('memberships.save_failure_msg')
       end
+    elsif @status == 'inuse' && last_part!=product_shortId
+      convert_result=status_convert('invalid')
+      redirect_to memberships_path, notice: convert_result
     else
-      save_result_notice(result)
+      convert_result=status_convert(@status)
+      redirect_to memberships_path, notice: convert_result
     end
   end
 
@@ -71,7 +77,8 @@ class MembershipsController < ApplicationController
         redirect_to memberships_path, notice: I18n.t('memberships.refresh_failure_msg')
       end
     else
-      save_result_notice(result)
+      convert_result=status_convert(result)
+      redirect_to memberships_path, notice: convert_result
     end
   end
 
@@ -87,19 +94,22 @@ class MembershipsController < ApplicationController
     end
   end
 
-  def save_result_notice(result)
-    case result
+  def status_convert(status)
+    case status
+    when 'inuse'
+      convert_result = I18n.t('memberships.save_inuse_msg')
+    when 'invalid'
+      convert_result = I18n.t('memberships.save_invalid_msg')
     when 'expired'
-      notice_message = I18n.t('memberships.save_expired_msg')
+      convert_result = I18n.t('memberships.save_expired_msg')
     when 'exhausted', 6
-      notice_message = I18n.t('memberships.save_exhausted_msg')
+      convert_result = I18n.t('memberships.save_exhausted_msg')
     when 'notfound', 3
-      notice_message = I18n.t('memberships.save_notfound_msg')
+      convert_result = I18n.t('memberships.save_notfound_msg')
     else
-      notice_message = I18n.t('memberships.save_operate_failure_msg')
+      convert_result = I18n.t('memberships.save_operate_failure_msg')
     end
-
-    redirect_to memberships_path, notice: notice_message
+    convert_result
   end
 
   def set_body_classes
