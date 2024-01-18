@@ -30,29 +30,18 @@ module Admin::MembershipsHelper
     status = ''
     valid_time = ''
     owner_nickname = ''
+    product_shortId=''
     if result['rc'] == 0
       data = result['data'][0]
       status = data['license']['status']
       owner_nickname = data['user']['nickname']
       valid_time = data['license']['effectivedateend']
       valid_time = DateTime.parse(valid_time).strftime("%Y-%m-%d %H:%M:%S") if valid_time.present?
-      case status
-      when 'inuse'
-        status = I18n.t('memberships.save_inuse_msg')
-      when 'expired'
-        status = I18n.t('memberships.save_expired_msg')
-      when 'exhausted'
-        status = I18n.t('memberships.save_exhausted_msg')
-      when 'notfound'
-        status = I18n.t('memberships.save_notfound_msg')
-      end
-    elsif result['rc'] == 3
-      status = I18n.t('memberships.save_notfound_msg')
-    elsif result['rc'] == 6
-      status = I18n.t('memberships.save_exhausted_msg')
+      product_shortId = data['product']['shortId']
+    else
+      status = result['rc']
     end
-
-    [status, valid_time, owner_nickname]
+    [status, valid_time, owner_nickname,product_shortId]
   end
 
   #  扣减配额
