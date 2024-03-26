@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-#source 'https://rubygems.org'
-source 'http://mirrors.tuna.tsinghua.edu.cn/rubygems'
+source 'https://rubygems.org'
+# source 'http://mirrors.tuna.tsinghua.edu.cn/rubygems'
 ruby '>= 3.0.0'
 
 gem 'puma', '~> 6.3'
